@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-md-12">
+    <h2 [highlight]="'red'">Home Component</h2>
+    <p highlight="green">
+      Name: {{name}}
+    </p>
+    <p appBold>
+        Location: {{location}}
+      </p>
+      <p>
+          Today Is: {{today}}
+        </p>
+    <ul>
+      <li *ngFor="let item of colors">{{item}}</li>
+    </ul>
+    <p [ngPlural]="count">
+      <ng-template ngPluralCase="1">this is One </ng-template>
+      <ng-template ngPluralCase="2">this is two </ng-template>
+      <ng-template ngPluralCase="3">this is Three </ng-template>
+      <ng-template ngPluralCase="1">this is One </ng-template>
+    </p>
+  </div>
+</div>
+
+<button (click)="chnageClass()">Clcik to change Color</button>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <app-producttable [allProduct]="products"></app-producttable>
+  </div>
+</div>

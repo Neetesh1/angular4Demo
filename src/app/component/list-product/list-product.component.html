@@ -1,0 +1,18 @@
+<h2>
+  All Product</h2>
+<div class="row">
+  <div class="col-sm-4 thumbnail" *ngFor="let p of products">
+    <strong>
+      <p>{{p.name | titlecase}}</p>
+    </strong>
+    price:
+    <p>{{ p.price | currency:'INR':true }}</p>
+    <p>
+      <a [routerLink]="['/edit',p.id]" [queryParams]="{name:p.name, price:p.price}">Edit</a>
+    </p>
+    <p>
+      <a class="btn btn-success" [routerLink]="['/add-cart',p.id]">Add To cart</a>
+      <a class="btn btn-info" [routerLink]="['/add-whishlist',p.id]">Add To wishlist</a>
+    </p>
+  </div>
+</div>
