@@ -7,6 +7,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { Category } from '../../models/category';
 import { DatePipe } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
+import { UnsavedComponentbase } from '../../guards/unsave.guard';
 
 @Component({
   selector: 'edit-product',
@@ -14,11 +15,13 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./edit-product.component.css'],
   providers:[DatePipe]
 })
-export class EditProductComponent implements OnInit {
+export class EditProductComponent implements OnInit, UnsavedComponentbase {
   private id: number;
   private product: Product;
   private forms: FormGroup;
   private categories: Category[];
+  private hasError:boolean=false;
+  private errorMessage:string;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -37,7 +40,7 @@ export class EditProductComponent implements OnInit {
     this.product = this.route.snapshot.data["product"];
     //console.log(this.product);
 
-    var dt = this.datepipe.transform(this.product.mgdate,"yyyy-MM-dd");
+    var dt = this.datepipe.transform(this.product.mfgDate,"yyyy-MM-dd");
     var nameControl = new FormControl(this.product.name, Validators.compose(
       [Validators.required, Validators.minLength(3)]));
 
@@ -47,7 +50,7 @@ export class EditProductComponent implements OnInit {
     this.forms=this.fb.group({
       'name':nameControl,
       'price':priceControl,
-      'mfgdate':[dt,Validators.required],
+      'mfgDate':[dt,Validators.required],
       'cateroyId':[this.product.categoryId,Validators.required],
       'id':[this.product.id]
     });
@@ -75,11 +78,22 @@ export class EditProductComponent implements OnInit {
   {
     if(this.forms.valid)
     {
-      this.productSvc.updateProduct(this.forms.value);
-     // this.route.navigate[''];
+      this.productSvc.updateProduct(this.forms.value).
+      subscribe(
+        data=>{
+          this.router.navigate(["/list"]);
+        },
+        err=>{
+          this.hasError=true;
+          this.errorMessage="Unable to Update the Details";
+          
+        }
+      )
     }
     else{
-      alert('erro');
+     this.hasError=true;
+     this.errorMessage="Invalid data";
+     
     }
   }
 

@@ -10,20 +10,30 @@ import { ListProductComponent } from "../component/list-product/list-product.com
 import { EditProductComponent } from "../component/edit-product/edit-product.component";
 import { ProductResolver } from "../resolvers/product.resolver";
 import { CategoryResolver } from "../resolvers/category.resolver";
+import { UnsaveComponentGuard } from "../guards/unsave.guard";
 
 var routes: Route[] = [
   { path: '', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactComponent },
-  { path: 'new', component: AddProductComponent },
+  {
+    path: 'new',
+    component: AddProductComponent,
+     resolve: {
+      categories: CategoryResolver
+    },
+    canDeactivate: [UnsaveComponentGuard]
+    
+  },
   { path: 'list', component: ListProductComponent },
-  { 
-    path: 'edit/:id', 
+  {
+    path: 'edit/:id',
     component: EditProductComponent,
-     resolve:{
-        product: ProductResolver,
-        categories: CategoryResolver
-      } 
+    resolve: {
+      product: ProductResolver,
+      categories: CategoryResolver
+    },
+    canDeactivate: [UnsaveComponentGuard]
   },
   { path: '**', component: PageNotFoundComponent }
 ]

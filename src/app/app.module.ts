@@ -22,6 +22,7 @@ import { EditProductComponent } from './component/edit-product/edit-product.comp
 import { CategoryService } from './services/category.service';
 import { ProductResolver } from './resolvers/product.resolver';
 import { CategoryResolver } from './resolvers/category.resolver';
+import { UnsaveComponentGuard } from './guards/unsave.guard';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { CategoryResolver } from './resolvers/category.resolver';
   providers: [ProductService,
       CategoryService,
       ProductResolver,
-      CategoryResolver 
+      CategoryResolver,
+      UnsaveComponentGuard 
   ],
   bootstrap: [AppComponent]
 })

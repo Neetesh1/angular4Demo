@@ -4,13 +4,15 @@ import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CategoryService } from '../../services/category.service';
+import { UnsavedComponentbase } from '../../guards/unsave.guard';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.css']
 })
-export class AddProductComponent implements OnInit {
+export class AddProductComponent implements OnInit, UnsavedComponentbase {
 
   private products: Product[];
 
@@ -30,6 +32,7 @@ export class AddProductComponent implements OnInit {
 
   ngOnInit() {
     this.categories = this.route.snapshot.data["categories"];
+    //console.log(this.categories);
   }
   public save(frm){
     if(frm.valid)

@@ -1,6 +1,7 @@
 <div class="row">
     <div class="col-md-6 col-sm-8 col-md-offset-3 col-md-offset-2">
       <h2>Edit Product</h2>
+      <div class="alert alert-danger" *ngIf="hasError">{{errorMessage}}</div>
       <form class="form-horizontal" [formGroup]="forms" (submit)="update(forms);">
         <input type="hidden" name="id" formControlName="id">
         <div class="form-group">
@@ -28,9 +29,9 @@
         <div class="form-group">
           <label class="control-label col-md-3" for="Manufacture">Mfg Date</label>
           <div class="col-md-9">
-            <input type="date" class="form-control"   formControlName="mfgdate" id="mfgDate" name="mfgDate"  />
-            <div class="text-danger" *ngIf="forms.controls.mfgdate.touched || forms.controls.mfgdate.dirty">
-                <div [hidden]="!forms.controls.mfgdate.hasError('required')">MfgDate is Required</div>
+            <input type="date" class="form-control"   formControlName="mfgDate" id="mfgDate" name="mfgDate"  />
+            <div class="text-danger" *ngIf="forms.controls.mfgDate.touched || forms.controls.mfgDate.dirty">
+                <div [hidden]="!forms.controls.mfgDate.hasError('required')">MfgDate is Required</div>
             </div>
           </div>
         </div>

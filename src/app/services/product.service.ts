@@ -76,12 +76,24 @@ export class ProductService {
   }
 
 
-  public updateProduct(product: Product): void {
-    this.products.forEach((item, index) => {
-      if (item.id == product.id) {
-        this.products.splice(index, 1, product);
-      }
-    })
+  public updateProduct(product: Product): Observable<Product> {
+
+    let reqHeaders = new Headers({
+      "Content-Type":"application/json"  //this method one to add 
+    });
+    reqHeaders.append("Accept","application/json"); //method two to add headers
+    let options = new RequestOptions({
+      headers:reqHeaders
+    });
+    return this.http.put(`${this.API_URL}/${product.id}`, product, options)
+    .map((resp: Response) => resp.json())
+    .catch(err => Observable.throw(err))
+    //Old Code
+    // this.products.forEach((item, index) => {
+    //   if (item.id == product.id) {
+    //     this.products.splice(index, 1, product);
+    //   }
+    // })
   }
 
 
