@@ -1,7 +1,7 @@
 <h2>
   All Product</h2>
 <div class="row">
-  <div class="col-sm-4 thumbnail" *ngFor="let p of products">
+  <div class="col-sm-4 thumbnail" *ngFor="let p of products | async">
     <strong>
       <p>{{p.name | titlecase}}</p>
     </strong>
