@@ -20,6 +20,8 @@ import { MinValidator } from './validators/minimum.directive';
 import { MaxValidator } from './validators/maximum.directive';
 import { EditProductComponent } from './component/edit-product/edit-product.component';
 import { CategoryService } from './services/category.service';
+import { ProductResolver } from './resolvers/product.resolver';
+import { CategoryResolver } from './resolvers/category.resolver';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,11 @@ import { CategoryService } from './services/category.service';
     InventoryRouterModule,
     HttpModule
   ],
-  providers: [ProductService,CategoryService ],
+  providers: [ProductService,
+      CategoryService,
+      ProductResolver,
+      CategoryResolver 
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -39,13 +39,25 @@ export class ProductService {
   }
 
 
-  public getProduct(id: number): Product {
-    var product: Product = null;
-    this.products.forEach((item, index) => {
-      if (item.id == id)
-        product = item;
-    })
-    return product;
+  public getProduct(id: number): Observable<Product> {
+    // var product: Product = null;
+    // this.products.forEach((item, index) => {
+    //   if (item.id == id)
+    //     product = item;
+    // })
+    // return product;
+
+    let reqHeaders = new Headers({
+      "Content-Type":"application/json"  //this method one to add 
+    });
+    reqHeaders.append("Accept","application/json"); //method two to add headers
+    let options = new RequestOptions({
+      headers:reqHeaders
+    });
+
+    return this.http.get(`${this.API_URL}/${id}`,options)
+      .map((resp: Response) => resp.json())
+      .catch(err => Observable.throw(err))
   }
 
   public AddProduct(product: Product): Observable<Product> {

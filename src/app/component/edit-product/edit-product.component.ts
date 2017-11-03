@@ -6,6 +6,7 @@ import { Product } from '../../models/product';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Category } from '../../models/category';
 import { DatePipe } from '@angular/common';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'edit-product',
@@ -29,9 +30,11 @@ export class EditProductComponent implements OnInit {
 
 
   ngOnInit() {
-    this.id = this.route.snapshot.params.id;
-    this.product = this.productSvc.getProduct(this.id);
-    this.categories = this.categorySvc.getCategories();
+   // this.id = this.route.snapshot.params.id;
+   
+    this.categories = this.route.snapshot.data["categories"];
+
+    this.product = this.route.snapshot.data["product"];
     //console.log(this.product);
 
     var dt = this.datepipe.transform(this.product.mgdate,"yyyy-MM-dd");
