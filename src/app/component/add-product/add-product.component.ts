@@ -15,6 +15,8 @@ export class AddProductComponent implements OnInit {
   private products: Product[];
 
   private categories:Category[];
+  private hasError:boolean=false;
+  private errorMessage:string;
 
   private product: Product;
   constructor(private ProductSvc:ProductService, private router:Router,private CategorySvc:CategoryService) { 
@@ -28,8 +30,17 @@ export class AddProductComponent implements OnInit {
   public save(frm){
     if(frm.valid)
     {
-      this.ProductSvc.AddProduct(this.product);
-      this.router.navigate(["/list"]);
+      this.ProductSvc.AddProduct(this.product)
+      .subscribe(
+        data=>{
+          console.log(data);
+          this.router.navigate(["/list"]);
+        },
+        err=>{
+          this.hasError = err;
+        }
+      )
+      
 
     }
     
