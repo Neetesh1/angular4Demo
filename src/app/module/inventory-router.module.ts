@@ -12,9 +12,11 @@ import { ProductResolver } from "../resolvers/product.resolver";
 import { CategoryResolver } from "../resolvers/category.resolver";
 import { UnsaveComponentGuard } from "../guards/unsave.guard";
 import { SearchComponent } from "../component/search/search.component";
+import { LoginComponent } from "../component/login/login.component";
 
 var routes: Route[] = [
-  { path: '', component: HomeComponent },
+  { path: '', component: LoginComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactComponent },
   {

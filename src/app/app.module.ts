@@ -27,6 +27,9 @@ import { SearchComponent } from './component/search/search.component';
 import { SearchBarComponent } from './component/search-bar/search-bar.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DataInterceptor } from './interceptors/data.interceptors';
+import { UserLoginComponent } from './component/user-login/user-login.component';
+import { AdminLoginComponent } from './component/admin-login/admin-login.component';
+import { LoginComponent } from './component/login/login.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,10 @@ import { DataInterceptor } from './interceptors/data.interceptors';
     MaxValidator,
     EditProductComponent,
     SearchComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    UserLoginComponent,
+    AdminLoginComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -65,6 +71,10 @@ import { DataInterceptor } from './interceptors/data.interceptors';
         useClass: DataInterceptor,
         multi: true
       } 
+  ],
+  entryComponents:[
+    UserLoginComponent,
+    AdminLoginComponent
   ],
   bootstrap: [AppComponent]
 })
