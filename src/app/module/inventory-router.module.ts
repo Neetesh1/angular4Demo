@@ -11,6 +11,7 @@ import { EditProductComponent } from "../component/edit-product/edit-product.com
 import { ProductResolver } from "../resolvers/product.resolver";
 import { CategoryResolver } from "../resolvers/category.resolver";
 import { UnsaveComponentGuard } from "../guards/unsave.guard";
+import { SearchComponent } from "../component/search/search.component";
 
 var routes: Route[] = [
   { path: '', component: HomeComponent },
@@ -35,6 +36,8 @@ var routes: Route[] = [
     },
     canDeactivate: [UnsaveComponentGuard]
   },
+
+  {path:'search', component:SearchComponent},
   { path: '**', component: PageNotFoundComponent }
 ]
 @NgModule({
