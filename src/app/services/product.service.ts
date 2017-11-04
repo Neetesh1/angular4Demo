@@ -7,6 +7,9 @@ import "rxjs/add/observable/throw";
 
 import { Http, Response, RequestOptions, Headers } from "@angular/http";
 import { Injectable } from "@angular/core";
+import { HttpClientModule } from "@angular/common/http";
+import { HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable()
 export class ProductService {
@@ -19,24 +22,34 @@ export class ProductService {
   //   {id:103,name:"Mirinda", price: 230, mgdate: new Date(),categoryId:2},
   //   {id:104,name:"Sprite", price: 140, mgdate: new Date(),categoryId:3}
   // ];
-  constructor(private http: Http) { }
+  constructor(private http: Http, private httpClient:HttpClient) { }
 
   public getProducts(): Observable<Product[]> {
 
-    let reqHeaders = new Headers({
-      "Content-Type":"application/json"  //this method one to add 
-    });
-    reqHeaders.append("Accept","application/json"); //method two to add headers
-    let options = new RequestOptions({
-      headers:reqHeaders
-    });
+    // let reqHeaders = new Headers({
+    //   "Content-Type":"application/json"  //this method one to add 
+    // });
+    // reqHeaders.append("Accept","application/json"); //method two to add headers
+    // let options = new RequestOptions({
+    //   headers:reqHeaders
+    // });
 
-    return this.http.get(this.API_URL,options)
-      .map((resp: Response) => resp.json())
-      .catch(err => Observable.throw(err))
+    // return this.http.get(this.API_URL,options)
+    //   .map((resp: Response) => resp.json())
+    //   .catch(err => Observable.throw(err))
     //return Observable.of(this.products);
     //return this.products;
+
+    let httpHeaders = new HttpHeaders({
+      "Content-Type":"application/json",
+      "Accept":"application/json"
+    });
+    let options ={
+      headers:httpHeaders
+    }
+    return this.httpClient.get<Product[]>(this.API_URL, options);
   }
+  
 
 
   public getProduct(id: number): Observable<Product> {

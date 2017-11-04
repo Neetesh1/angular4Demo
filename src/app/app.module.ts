@@ -25,6 +25,8 @@ import { CategoryResolver } from './resolvers/category.resolver';
 import { UnsaveComponentGuard } from './guards/unsave.guard';
 import { SearchComponent } from './component/search/search.component';
 import { SearchBarComponent } from './component/search-bar/search-bar.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { DataInterceptor } from './interceptors/data.interceptors';
 
 @NgModule({
   declarations: [
@@ -50,13 +52,19 @@ import { SearchBarComponent } from './component/search-bar/search-bar.component'
     FormsModule,
     ReactiveFormsModule,
     InventoryRouterModule,
-    HttpModule
+    HttpModule,
+    HttpClientModule
   ],
   providers: [ProductService,
       CategoryService,
       ProductResolver,
       CategoryResolver,
-      UnsaveComponentGuard 
+      UnsaveComponentGuard,
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: DataInterceptor,
+        multi: true
+      } 
   ],
   bootstrap: [AppComponent]
 })
