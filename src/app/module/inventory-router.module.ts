@@ -27,6 +27,7 @@ var routes: Route[] = [
     
   },
   { path: 'list', component: ListProductComponent },
+
   {
     path: 'edit/:id',
     component: EditProductComponent,
@@ -38,6 +39,7 @@ var routes: Route[] = [
   },
 
   {path:'search', component:SearchComponent},
+  { path: 'categories', loadChildren: 'app/category.module/category.module#CategoryModule' },
   { path: '**', component: PageNotFoundComponent }
 ]
 @NgModule({

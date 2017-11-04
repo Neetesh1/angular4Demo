@@ -10,7 +10,7 @@
       <td>{{i+1}}</td>
       <td>{{product.id}}</td>
       <td [class]="mycssClass"   [ngStyle]="{'color':colorName,'fontt-size.px':size}">{{product.name | titlecase}} 
-        <span class="badge" *ngIf="product.mgdate===currentDate">New</span>
+        <span class="badge" *ngIf="product.mgfDate===currentDate">New</span>
       </td>
       <td>
         {{ product.price | currency:'INR':true }}
